@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Traffic Simulation Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card {
+            @apply bg-gray-800 rounded-lg shadow-lg p-6 transform hover:scale-105 transition-transform duration-300;
+        }
+        .card-title {
+            @apply text-xl font-bold text-white mb-2;
+        }
+        .card-description {
+            @apply text-gray-400 mb-4;
+        }
+        .card-link {
+            @apply inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold px-4 py-2 rounded-md transition-colors duration-200;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 flex flex-col min-h-screen">
+
+    <header class="bg-gray-800 shadow-md p-4 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold text-white">Dashboard</h1>
+            <p class="text-sm text-gray-400">Welcome! Select a tool to begin.</p>
+        </div>
+        <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded-md transition-colors duration-200">Logout</a>
+    </header>
+
+    <main class="flex-grow container mx-auto p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Multi-Lane Simulator Card -->
+            <div class="card">
+                <h2 class="card-title">🚦 Multi-Lane Simulator</h2>
+                <p class="card-description">An advanced highway simulation with overtaking logic, weather effects, and driver personalities.</p>
+                <a href="/protected/multilane.html" class="card-link">Launch Simulator</a>
+            </div>
+
+            <!-- Single-Lane Simulator Card -->
+            <div class="card">
+                <h2 class="card-title">🚗 Single-Lane Simulator</h2>
+                <p class="card-description">A classic traffic flow visualizer with interactive signal control and real-time queue metrics.</p>
+                <a href="/protected/index.html" class="card-link">Launch Simulator</a>
+            </div>
+
+            <!-- Vehicle Details Card -->
+            <div class="card">
+                <h2 class="card-title">🔍 Vehicle Details</h2>
+                <p class="card-description">Look up vehicle registration information and check for any pending challans or violations.</p>
+                <a href="/protected/rcdetail.html" class="card-link">Open Lookup</a>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

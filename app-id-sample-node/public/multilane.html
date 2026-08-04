@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Lane Simulation - Project Rody</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Specific styles for multi-lane page if needed */
+        #multilaneCanvas {
+            background-color: #020617; /* Darker background for roads */
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div>
+                <h1 id="appTitle">Project Rody</h1>
+                <p id="appSubtitle">Multi-Lane Simulation</p>
+            </div>
+            <div class="header-nav">
+                <a href="index.html" class="btn btn-sky"><i class="fa-solid fa-traffic-light"></i> Back to Main Sim</a>
+                <button id="analyticsBtn" class="btn btn-emerald"><i class="fa-solid fa-chart-line"></i> Analytics</button>
+            </div>
+        </header>
+        <main class="main-content">
+            <!-- Canvas Viewport -->
+            <div class="canvas-card">
+                <div class="canvas-header">
+                    <div>
+                        <span class="status-dot"></span>
+                        <span class="canvas-title"> Multi-Lane Canvas</span>
+                    </div>
+                    <span class="car-count">Vehicles: <strong id="carCount">0</strong></span>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="multilaneCanvas"></canvas>
+                </div>
+            </div>
+            <!-- Controls Panel -->
+            <aside class="controls-card">
+                <h2>Multi-Lane Controls</h2>
+                <div class="control-group">
+                    <label for="inflowSlider">Inflow Rate (<span id="inflowVal">40</span> cars/min)</label>
+                    <input type="range" id="inflowSlider" min="10" max="120" value="40">
+                </div>
+                <div class="control-group">
+                    <label for="speedSlider">Max Speed (<span id="speedVal">120</span> px/s)</label>
+                    <input type="range" id="speedSlider" min="40" max="240" value="120">
+                </div>
+                <div class="control-group">
+                    <label for="numLanesSlider">Number of Lanes (<span id="numLanesVal">2</span>)</label>
+                    <input type="range" id="numLanesSlider" min="1" max="4" value="2">
+                </div>
+                <div class="control-group">
+                    <label for="overtakeThresholdSlider">Overtake Threshold (<span id="overtakeThresholdVal">50</span> px)</label>
+                    <input type="range" id="overtakeThresholdSlider" min="20" max="100" value="50">
+                </div>
+
+                <div class="control-group">
+                    <label>Weather Conditions</label>
+                    <div class="weather-controls">
+                        <button id="weatherClear" class="btn weather-btn active">Clear</button>
+                        <button id="weatherRain" class="btn weather-btn">Rain</button>
+                        <button id="weatherSnow" class="btn weather-btn">Snow</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Driver Behavior</label>
+                    <button id="personalitiesBtn" class="btn btn-sky w-full">Personalities: OFF</button>
+                </div>
+
+                <!-- Stats Dashboard -->
+                <div class="metrics-box">
+                    <h3>Live Metrics</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <span class="metric-label">Total Vehicles</span>
+                            <span class="metric-value" id="metricTotalVehicles">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Overtakes</span>
+                            <span class="metric-value status-fluid" id="metricOvertakes">0</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Analytics Modal -->
+            <div id="analyticsModal" class="modal-overlay hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fa-solid fa-chart-line"></i> Multi-Lane Analytics Dashboard</h3>
+                        <button class="close-button" onclick="closeAnalyticsModal()"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="analytics-grid">
+                            <div class="metric-card">
+                                <span class="metric-label">Total Cars Spawned</span>
+                                <span class="metric-value" id="analyticSpawned">0</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Total Cars Exited</span>
+                                <span class="metric-value" id="analyticExited">0</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Simulation Uptime</span>
+                                <span class="metric-value" id="analyticUptime">0s</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Current Vehicles</span>
+                                <span class="metric-value" id="analyticCurrentVehicles">0</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Total Overtakes</span>
+                                <span class="metric-value" id="analyticOvertakes">0</span>
+                            </div>
+                            <div class="metric-card">
+                                <span class="metric-label">Throughput Rate</span>
+                                <span class="metric-value" id="analyticThroughput">0 cars/min</span>
+                            </div>
+                        </div>
+                        <p class="modal-info">
+                            <i class="fa-solid fa-info-circle"></i> Metrics update in real-time. Reset simulation to clear data.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-rose" onclick="resetAnalytics()">
+                            <i class="fa-solid fa-rotate-right"></i> Reset Analytics
+                        </button>
+                        <button class="btn btn-sky" onclick="closeAnalyticsModal()">
+                            <i class="fa-solid fa-check"></i> Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="multilane_script.js"></script>
+</body>
+</html>

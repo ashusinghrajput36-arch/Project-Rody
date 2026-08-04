@@ -1,0 +1,3 @@
+applications:
+- name: AppID2f-node-ef611124-da4f-4ec6-914b-397d601a6d4d
+  memory: 256M

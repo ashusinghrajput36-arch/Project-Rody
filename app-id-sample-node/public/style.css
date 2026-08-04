@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #1e293b; /* Brighter background */
+    color: #f1f5f9;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+}
+.app-container {
+    max-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+@media (max-width: 851px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+.canvas-card {
+    background: #334155; /* Brighter card color */
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.canvas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+}
+.car-count strong {
+    color: #fff;
+}
+.canvas-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #1e293b;
+    position: relative;
+}
+#trafficCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+}
+.controls-card {
+    background: #334155; /* Brighter card color */
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.crossroad-mode #singleRoadControls {
+    display: none;
+}
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.timer-mode-group {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 10px;
+}
+.timer-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+}
+.timer-input-wrapper input {
+    width: 70px;
+    padding: 8px;
+    background-color: #020617;
+    border: 1px solid #1e293b;
+    color: #f1f5f9;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+.weather-controls {
+    display: flex;
+    gap: 10px;
+}
+.weather-btn {
+    background: rgba(2, 132, 199, 0.2);
+    color: #38bdf8;
+    border-color: rgba(2, 132, 199, 0.4);
+}
+.weather-btn.active {
+    background-color: #0ea5e9;
+    color: white;
+}
+.control-group input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+}
+.btn {
+    padding: 11px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    font-size: 0.85rem;
+    flex-grow: 1;
+    text-transform: uppercase;    
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.btn-emerald {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border-color: rgba(16, 185, 129, 0.3);
+}
+.btn-rose {
+    background: rgba(244, 63, 94, 0.15);
+    color: #fb7185;
+    border-color: rgba(244, 63, 94, 0.3);
+}
+.btn-sky {
+    background: rgba(2, 132, 199, 0.2);
+    color: #38bdf8;
+    border-color: rgba(2, 132, 199, 0.4);
+}
+.metrics-box {
+    background: #1e293b; /* Brighter metrics box */
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: auto;
+}
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.metric-card {
+    background: #334155; /* Brighter metric card */
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #1e293b;
+}
+.metric-label {
+    display: block;
+    font-size: 0.7rem;
+    color: #94a3b8;
+}
+.metric-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f87171;
+}
+.status-fluid { color: #34d399; }
+.status-moderate { color: #facc15; }
+.status-heavy { color: #f87171; }
+
+/* Analytics Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #334155;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 25px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 15px;
+}
+
+.modal-header h3 {
+    font-size: 1.2rem;
+    color: #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-header .close-button {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+.modal-info {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid #1e293b;
+    padding-top: 15px;
+}
+.hidden {
+    display: none;
+}

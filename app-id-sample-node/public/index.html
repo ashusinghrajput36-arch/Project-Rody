@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rody</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div>
+                <h1 id="appTitle">Project Rody</h1>
+                <p id="appSubtitle">Single Road Simulation</p>
+            </div>
+            <div class="header-nav">
+                <a href="https://myparivahan.com/rc-search" target="_blank" class="btn btn-sky"><i class="fa-solid fa-id-card"></i> RC Finder</a>
+                <a href="https://echallan.parivahan.gov.in/index/accused-challan" target="_blank" class="btn btn-sky"><i class="fa-solid fa-receipt"></i> Challan Check</a>
+                <a href="https://ihmcl.co.in/fastag-user/" target="_blank" class="btn btn-sky"><i class="fa-solid fa-credit-card"></i> FASTag</a>
+                <button id="analyticsBtn" class="btn btn-emerald"><i class="fa-solid fa-chart-line"></i> Analytics</button>
+                <a href="multilane.html" class="btn btn-sky"><i class="fa-solid fa-road"></i> Multi-Lane Sim</a>
+            </div>
+        </header>
+        <main class="main-content">
+            <!-- Canvas Viewport -->
+            <div class="canvas-card">
+                <div class="canvas-header">
+                    <div>
+                        <span class="status-dot"></span>
+                        <span class="canvas-title"> Canvas</span>
+                    </div>
+                    <span class="car-count">Vehicles: <strong id="carCount">0</strong></span>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="trafficCanvas"></canvas>
+                </div>
+            </div>
+            <!-- Controls Panel -->
+            <aside class="controls-card">
+                <div class="flex justify-between items-center">
+                    <h2>Controls</h2>
+                    <button id="crossroadToggleBtn" class="btn btn-sky text-xs py-2 px-3">Cross Road Mode</button>
+                </div>
+                <div class="control-group">
+                    <label for="inflowSlider">Inflow Rate (<span id="inflowVal">40</span> cars/min)</label>
+                    <input type="range" id="inflowSlider" min="10" max="120" value="40">
+                </div>
+                <div class="control-group">
+                    <label for="speedSlider">Max Speed (<span id="speedVal">120</span> px/s)</label>
+                    <input type="range" id="speedSlider" min="40" max="240" value="120">
+                </div>
+                <div id="singleRoadControls">
+                    <button id="toggleLightBtn" class="btn btn-emerald w-full">Manual Signal: GREEN</button>
+                    <button id="adaptiveModeBtn" class="btn btn-sky w-full">Activate Adaptive Mode</button>
+                </div>
+                <div id="timerControls" class="control-group timer-mode-group">
+                    <div class="timer-input-wrapper">
+                        <label for="timerIntervalInput">Interval (s)</label>
+                        <input type="number" id="timerIntervalInput" value="5" min="2">
+                    </div>
+                    <button id="timerModeBtn" class="btn btn-sky">
+                        <span id="timerModeText">Activate Timer Mode</span>
+                        <span id="timerCountdown"></span>
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <label>Weather Conditions</label>
+                    <div class="weather-controls">
+                        <button id="weatherClear" class="btn weather-btn active">Clear</button>
+                        <button id="weatherRain" class="btn weather-btn">Rain</button>
+                        <button id="weatherSnow" class="btn weather-btn">Snow</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Driver Behavior</label>
+                    <button id="personalitiesBtn" class="btn btn-sky w-full">Personalities: OFF</button>
+                </div>
+
+                <!-- Stats Dashboard -->
+                <div class="metrics-box">
+                    <h3>Live Metrics</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <span class="metric-label">Queue</span>
+                            <span class="metric-value" id="metricQueue">0 cars</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Flow Status</span>
+                            <span class="metric-value status-fluid" id="metricStatus">Fluid</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Analytics Modal -->
+        <div id="analyticsModal" class="modal-overlay hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fa-solid fa-chart-line"></i> Simulation Analytics Dashboard</h3>
+                    <button class="close-button" onclick="closeAnalyticsModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="analytics-grid">
+                        <div class="metric-card">
+                            <span class="metric-label">Total Cars Spawned</span>
+                            <span class="metric-value" id="analyticSpawned">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Total Cars Exited</span>
+                            <span class="metric-value" id="analyticExited">0</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Simulation Uptime</span>
+                            <span class="metric-value" id="analyticUptime">0s</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Current Queue</span>
+                            <span class="metric-value" id="analyticQueue">0 cars</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Current Flow</span>
+                            <span class="metric-value" id="analyticFlowStatus">Fluid</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-label">Throughput Rate</span>
+                            <span class="metric-value" id="analyticThroughput">0 cars/min</span>
+                        </div>
+                    </div>
+                    <p class="modal-info">
+                        <i class="fa-solid fa-info-circle"></i> Metrics update in real-time. Reset simulation to clear data.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-rose" onclick="resetAnalytics()">
+                        <i class="fa-solid fa-rotate-right"></i> Reset Analytics
+                    </button>
+                    <button class="btn btn-sky" onclick="closeAnalyticsModal()">
+                        <i class="fa-solid fa-check"></i> Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
