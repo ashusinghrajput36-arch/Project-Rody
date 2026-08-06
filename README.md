@@ -1,25 +1,34 @@
-# IBM Cloud App ID
-Node Sample Template App for the IBM Cloud App ID service. The App ID Dashboard overwrites the manifest.yml and localdev-config.json files with the user's information when they download a Node sample app. When downloaded, you can either run the application locally or in IBM Cloud.
+# IBM Cloud App ID - Node.js Sample Application
 
-[![IBM Cloud powered][img-ibmcloud-powered]][url-ibmcloud]
-[![Node Badge][img-node-badge]][url-node-badge]
-[![Travis][img-travis-master]][url-travis-master]
-[![Coveralls][img-coveralls-master]][url-coveralls-master]
-[![Codacy][img-codacy]][url-codacy]
+This repository contains a sample Node.js application that demonstrates how to protect web apps with [IBM Cloud App ID](https://www.ibm.com/cloud/app-id).
 
-[![GithubWatch][img-github-watchers]][url-github-watchers]
-[![GithubStars][img-github-stars]][url-github-stars]
-[![GithubForks][img-github-forks]][url-github-forks]
+## About
+
+The App ID service helps you secure and add authentication to your cloud-native applications and APIs. This sample application is a simple Express.js web app with a "Login" button and a protected page that is only accessible after a user authenticates with App ID.
+
+This sample is designed to be used as a template. When downloaded from the App ID dashboard, it is pre-configured with your service credentials.
+
+[![Build Status][img-travis-master]][url-travis-master]
+[![Coverage Status][img-coveralls-master]][url-coveralls-master]
+[![Codacy Grade][img-codacy]][url-codacy]
+[![Node.js Version][img-node-badge]][url-node-badge]
+[![IBM Cloud Powered][img-ibmcloud-powered]][url-ibmcloud]
+
+[![GitHub Watchers][img-github-watchers]][url-github-watchers]
+[![GitHub Stars][img-github-stars]][url-github-stars]
+[![GitHub Forks][img-github-forks]][url-github-forks]
 
 ## Table of Contents
-* [Contents](#contents)
-* [Requirements](#requirements)
+* [About](#about)
+* [Prerequisites](#prerequisites)
 * [Running Locally](#running-locally)
-* [Running in IBM Cloud](#running-in-ibm-cloud)
-* [Clarification](#clarification)
+* [Deploying to Cloud Foundry](#deploying-to-cloud-foundry)
+* [Deploying to Kubernetes](#deploying-to-kubernetes)
+* [Important Notes](#important-notes)
+* [Getting Help](#getting-help)
 * [License](#license)
 
-## Contents
+### Application Files
 
 `app.js`  Uses Express to set the routes.
 
@@ -29,11 +38,13 @@ Node Sample Template App for the IBM Cloud App ID service. The App ID Dashboard 
 we check whether the user is authorized or not. In the case where the user is not authorized, we send a request to the
 authentication server to start the OAuth flow. If the user is authorized, we show the protected data.
 
-## Requirements
-* Node 6.0.0 or higher
+## Prerequisites
+
+*   Node.js version 6.0.0 or higher.
+*   An instance of the IBM Cloud App ID service.
+*   IBM Cloud CLI for cloud deployments.
 
 ## Running Locally
-
 Run the following commands:
 ```bash
 npm install
